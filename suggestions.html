@@ -64,6 +64,13 @@
       if (username && suggestion) {
         const message = `📬 **اقتراح جديد**\n👤 **اسم المرسل:** ${username}\n--------------------\n💡 **الاقتراح:**\n${suggestion}`;
 
+        <ul class="nav-links">
+            <li><a href="index.html">الصفحه الرئيسيه</a></li>
+            <li><a href="store.html">المتجر</a></li>
+            <li><a href="terms.html">الشروط والأحكام</a></li>
+            <li><a href="suggestions.html">الاقتراحات</a></li>
+        </ul>
+
         fetch(webhookURL, {
           method: "POST",
           headers: {
