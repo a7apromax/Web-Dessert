@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <title>إرسال اقتراح</title>
+  <style>
+    body {
+      background-color: #121212;
+      font-family: Arial, sans-serif;
+      color: white;
+      text-align: center;
+      padding-top: 50px;
+    }
+
+    .box {
+      background-color: #1e1e1e;
+      padding: 20px;
+      border-radius: 10px;
+      width: 90%;
+      max-width: 400px;
+      margin: auto;
+    }
+
+    input, textarea {
+      width: 90%;
+      margin: 10px 0;
+      padding: 10px;
+      border-radius: 5px;
+      border: none;
+      font-size: 16px;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #5865F2;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #4752c4;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="box">
+    <h2>إرسال اقتراح</h2>
+    <input type="text" id="username" placeholder="اسم المرسل (تمنشنة)">
+    <textarea id="suggestion" rows="5" placeholder="اكتب اقتراحك هنا"></textarea>
+    <br>
+    <button onclick="sendSuggestion()">إرسال</button>
+  </div>
+
+  <script>
+    function sendSuggestion() {
+      const username = document.getElementById("username").value.trim();
+      const suggestion = document.getElementById("suggestion").value.trim();
+      const webhookURL = "https://discord.com/api/webhooks/1382920398135627929/YYrrZOXkrJwux_ZgXJjaztUCQ5_p5Xvg1tpRQ8k05ibtPbAxCMX6dIm3C0WbZ3J-H88v";
+
+      if (username && suggestion) {
+        const message = `📬 **اقتراح جديد**\n👤 **اسم المرسل:** ${username}\n--------------------\n💡 **الاقتراح:**\n${suggestion}`;
+
+        fetch(webhookURL, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({ content: message })
+        })
+        .then(() => {
+          alert("✅ تم إرسال الاقتراح بنجاح!");
+          document.getElementById("username").value = "";
+          document.getElementById("suggestion").value = "";
+        })
+        .catch((error) => {
+          console.error("حدث خطأ:", error);
+          alert("❌ حدث خطأ أثناء الإرسال.");
+        });
+      } else {
+        alert("❗ الرجاء ملء جميع الحقول.");
+      }
+    }
+  </script>
+
+</body>
+</html>
